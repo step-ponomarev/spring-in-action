@@ -1,0 +1,4 @@
+Your tacos:
+<div th:each="taco : ${tacoOrder.tacos}">
+    <h1 th:text="${taco.name}"></h1>
+</div>

@@ -1,7 +1,10 @@
-package tacos;
+package tacos.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import tacos.data.Taco;
+import tacos.data.TacoOrder;
 
 @Controller
 public class HomeController {
