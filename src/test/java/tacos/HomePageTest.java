@@ -1,4 +1,4 @@
-package tacos.controller;
+package tacos;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -8,10 +8,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import tacos.web.controller.HomeController;
+import tacos.service.TacoService;
 
-@WebMvcTest(HomeController.class)
-public class HomeControllerTest {
+
+@WebMvcTest(TacoService.class)
+public class HomePageTest {
     @Autowired
     private MockMvc mockMvc;
 
