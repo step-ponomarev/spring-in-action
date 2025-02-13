@@ -8,8 +8,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(HomeController.class)
-public class HomeControllerTest {
+import tacos.service.TacoService;
+
+
+@WebMvcTest(TacoService.class)
+public class HomePageTest {
     @Autowired
     private MockMvc mockMvc;
 
