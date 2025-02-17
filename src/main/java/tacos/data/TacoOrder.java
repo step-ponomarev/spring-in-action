@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -23,6 +24,7 @@ public final class TacoOrder {
     private String deliveryStreet;
     @NotBlank(message = "City is required")
     private String deliveryCity;
+    @Size(max = 2)
     @NotBlank(message = "State is required")
     private String deliveryState;
     @NotBlank(message = "Zip code is required")

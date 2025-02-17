@@ -76,7 +76,7 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private void saveTaco(long orderId, int orderKey, Taco taco) {
         taco.setCreatedAt(new Date());
-        final PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(CREATE_TACO_SQL, Types.BIGINT, Types.BIGINT, Types.TIMESTAMP);
+        final PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(CREATE_TACO_SQL, Types.VARCHAR, Types.BIGINT, Types.BIGINT, Types.TIMESTAMP);
         pscf.setReturnGeneratedKeys(true);
 
         final PreparedStatementCreator psc = pscf.newPreparedStatementCreator(
