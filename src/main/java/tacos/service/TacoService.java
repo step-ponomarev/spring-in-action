@@ -38,9 +38,7 @@ public class TacoService {
     }
 
     public List<Ingredient> getIngredients(Ingredient.Type type) {
-        return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
-                .filter(ingredient -> ingredient.getType() == type)
-                .collect(Collectors.toList());
+        return ingredientRepository.findByType(type);
     }
 
     public Ingredient getById(String id) {
