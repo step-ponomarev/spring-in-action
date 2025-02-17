@@ -1,5 +1,6 @@
 package tacos.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,20 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import tacos.data.Taco;
 import tacos.data.TacoOrder;
+import tacos.service.TacoService;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
+    private final TacoService tacoService;
+
+    @Autowired
+    public OrderController(TacoService tacoService) {
+        this.tacoService = tacoService;
+    }
+
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -36,6 +45,7 @@ public class OrderController {
         }
 
         log.info("Processing order: ", order);
+        tacoService.save(order);
         sessionStatus.setComplete();
 
         return "redirect:/";

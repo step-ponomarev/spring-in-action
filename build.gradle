@@ -19,10 +19,19 @@ repositories {
 }
 
 dependencies {
+	// core
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// database
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	implementation group: 'com.h2database', name: 'h2', version: '2.3.232'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
