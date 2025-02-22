@@ -1,0 +1,1 @@
+docker run -it --network cassandra-net --rm cassandra cqlsh my-cassandra

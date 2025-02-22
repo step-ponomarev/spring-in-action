@@ -29,7 +29,6 @@ public class WebConfig implements WebMvcConfigurer {
             repository.save(new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE));
             repository.save(new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE));
             repository.save(new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
-
         };
     }
 }
