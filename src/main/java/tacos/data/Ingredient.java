@@ -1,8 +1,8 @@
 package tacos.data;
 
-import org.springframework.data.cassandra.core.mapping.Indexed;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,14 +10,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Table("ingredients")
+@Document(collation = "ingredients")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public final class Ingredient {
-    @PrimaryKey
+    @Id
     private String id;
     private String name;
-    @Indexed("type")
+    @Indexed
     private Type type;
 
     public enum Type {

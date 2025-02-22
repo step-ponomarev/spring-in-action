@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import tacos.data.Ingredient;
 import tacos.data.Taco;
 import tacos.data.TacoOrder;
-import tacos.data.TacoUDT;
 import tacos.service.TacoService;
 import tacos.web.model.IngredientCategories;
 
@@ -76,7 +75,7 @@ public class DesignTacoController {
         }
 
         log.info("Processing taco: " + taco);
-        tacoOrder.addTaco(new TacoUDT(taco.getName(), taco.getIngredients()));
+        tacoOrder.addTaco(taco);
 
         return "redirect:/orders/current";
     }
