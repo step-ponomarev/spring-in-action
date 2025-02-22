@@ -3,15 +3,15 @@ package tacos.data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.datastax.oss.driver.api.core.uuid.Uuids;
+
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -19,11 +19,10 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-@Entity
+@Table("orders")
 public final class TacoOrder {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @PrimaryKey
+    private UUID id = Uuids.timeBased();
     private Date createdAt = new Date();
 
     @NotBlank(message = "Delivery name is required")
@@ -44,10 +43,10 @@ public final class TacoOrder {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private final List<Taco> tacos = new ArrayList<>();
+    @Column("tacos")
+    private final List<TacoUDT> tacos = new ArrayList<>();
 
-    public void addTaco(Taco taco) {
+    public void addTaco(TacoUDT taco) {
         this.tacos.add(taco);
     }
 }
