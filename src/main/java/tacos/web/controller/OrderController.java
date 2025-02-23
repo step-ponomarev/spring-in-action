@@ -12,9 +12,8 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import tacos.data.Taco;
-import tacos.data.TacoOrder;
-import tacos.service.TacoService;
+import tacos.order.data.TacoOrder;
+import tacos.order.TacoService;
 
 @Slf4j
 @Controller
