@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import tacos.data.Ingredient;
-import tacos.data.Taco;
-import tacos.data.TacoOrder;
-import tacos.service.TacoService;
+import tacos.order.data.Ingredient;
+import tacos.order.data.Taco;
+import tacos.order.data.TacoOrder;
+import tacos.order.TacoService;
 import tacos.web.model.IngredientCategories;
 
 @Slf4j

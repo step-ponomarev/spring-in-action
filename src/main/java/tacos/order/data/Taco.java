@@ -1,4 +1,4 @@
-package tacos.data;
+package tacos.order.data;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Generated;
 
 @Data
 @Entity

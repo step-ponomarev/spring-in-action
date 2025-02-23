@@ -3,7 +3,7 @@ package tacos.web.model;
 import java.util.List;
 
 import lombok.Data;
-import tacos.data.Ingredient;
+import tacos.order.data.Ingredient;
 
 @Data
 public class IngredientCategories {
