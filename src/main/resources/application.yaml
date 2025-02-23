@@ -1,14 +1,46 @@
+
+#instead of logback.xml
+logging:
+  file:
+    path: /var/logs
+    file: TacoCloud.log
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
+
+server:
+  port: 8080
+# tls
+# port: 8443
+# keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg  RSA
+#  ssl:
+#    key-store: file:///path/to/mykeys.jks
+#    key-store-password: pass
+#    key-password: pass
+
+
 spring:
   application:
       name: taco-cloud
   thymeleaf:
     cache: false
+
   datasource:
     generate-unique-name: false
     name: tacocloud
     username: stepan
     password: 1234
-
+    url: jdbc:h2:mem:tacocloud
+#
+#    hikari:
+#      schema:
+#        - schema.sql
+#        - schema1.sql
+#        - schema2.sql
+#        - ...
+#      data:
+#        - 1.sql
+#        - ..
   data:
     jdbc:
       dialect: h2
