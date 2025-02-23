@@ -44,4 +44,8 @@ public class TacoService {
     public Ingredient getById(String id) {
         return ingredientRepository.findById(id).orElse(null);
     }
+
+    public void deleteAll() {
+        orderRepository.deleteAll();
+    }
 }
