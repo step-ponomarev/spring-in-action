@@ -11,12 +11,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import tacos.security.User;
 
 @Data
 @Entity
@@ -25,6 +27,9 @@ public final class TacoOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date createdAt = new Date();
+
+    @ManyToOne
+    private User user;
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
