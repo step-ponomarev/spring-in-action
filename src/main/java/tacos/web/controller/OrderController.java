@@ -1,8 +1,9 @@
 package tacos.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.oracle.svm.core.annotate.Delete;
-
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import tacos.order.data.TacoOrder;
 import tacos.order.TacoService;
+import tacos.security.User;
 
 @Slf4j
 @Controller
@@ -52,10 +52,15 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid @ModelAttribute(name = "tacoOrder") TacoOrder order, Errors errors, SessionStatus sessionStatus) {
+    public String processOrder(@Valid @ModelAttribute(name = "tacoOrder") TacoOrder order,
+                               Errors errors,
+                               SessionStatus sessionStatus,
+                               @AuthenticationPrincipal User currentUser) {
         if (errors.hasErrors()) {
             return orderForm();
         }
+
+        order.setUser(currentUser);
 
         log.info("Processing order: ", order);
         tacoService.save(order);
