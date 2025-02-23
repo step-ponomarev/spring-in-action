@@ -1,0 +1,23 @@
+spring:
+  application:
+      name: taco-cloud
+  thymeleaf:
+    cache: false
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+    username: stepan
+    password: 1234
+
+  data:
+    jdbc:
+      dialect: h2
+
+  #supports by default: gitlab, google, facebook, okta...
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          client-id: <facebook client id>
+#          client-secret: <facebook client secret>
+#          scope: email, public_profile
