@@ -1,3 +1,10 @@
+# bad way profile activation
+spring:
+  profiles:
+    active:
+      - dev
+# best practice export SPRING_PROFILES_ACTIVE=prod,adult,...
+
 
 #instead of logback.xml
 logging:
@@ -5,8 +12,7 @@ logging:
     path: /var/logs
     file: TacoCloud.log
   level:
-    root: WARN
-    org.springframework.security: DEBUG
+    root: DEBUG
 
 server:
   port: 8080
@@ -19,19 +25,6 @@ server:
 #    key-password: pass
 
 
-spring:
-  application:
-      name: taco-cloud
-  thymeleaf:
-    cache: false
-
-  datasource:
-    generate-unique-name: false
-    name: tacocloud
-    username: stepan
-    password: 1234
-    url: jdbc:h2:mem:tacocloud
-#
 #    hikari:
 #      schema:
 #        - schema.sql
@@ -41,9 +34,6 @@ spring:
 #      data:
 #        - 1.sql
 #        - ..
-  data:
-    jdbc:
-      dialect: h2
 
   #supports by default: gitlab, google, facebook, okta...
 #  security:
@@ -53,3 +43,7 @@ spring:
 #          client-id: <facebook client id>
 #          client-secret: <facebook client secret>
 #          scope: email, public_profile
+
+
+# props
+# tacos.props.OrderProps

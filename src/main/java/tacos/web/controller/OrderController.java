@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,12 @@ public class OrderController {
     public String deleteAll() {
         tacoService.deleteAll();
         return "redirect:/";
+    }
+
+    public String ordersForCurrentUser(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("orders", tacoService.getOrders(user));
+
+        return "orderList";
     }
 
     @PostMapping
