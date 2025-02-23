@@ -3,6 +3,7 @@ package tacos.web;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -18,6 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    // @Profile({"!prod"}) все, кроме прод профиля
+    @Profile({"dev"}) // Будет выполняться только в дев профиле
     public CommandLineRunner commandLineRunner(IngredientRepository repository) {
         return args -> {
             repository.save(new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP));

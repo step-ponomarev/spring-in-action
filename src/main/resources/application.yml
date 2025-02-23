@@ -1,0 +1,49 @@
+# bad way profile activation
+spring:
+  profiles:
+    active:
+      - dev
+# best practice export SPRING_PROFILES_ACTIVE=prod,adult,...
+
+
+#instead of logback.xml
+logging:
+  file:
+    path: /var/logs
+    file: TacoCloud.log
+  level:
+    root: DEBUG
+
+server:
+  port: 8080
+# tls
+# port: 8443
+# keytool -keystore mykeys.jks -genkey -alias tomcat -keyalg  RSA
+#  ssl:
+#    key-store: file:///path/to/mykeys.jks
+#    key-store-password: pass
+#    key-password: pass
+
+
+#    hikari:
+#      schema:
+#        - schema.sql
+#        - schema1.sql
+#        - schema2.sql
+#        - ...
+#      data:
+#        - 1.sql
+#        - ..
+
+  #supports by default: gitlab, google, facebook, okta...
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          client-id: <facebook client id>
+#          client-secret: <facebook client secret>
+#          scope: email, public_profile
+
+
+# props
+# tacos.props.OrderProps

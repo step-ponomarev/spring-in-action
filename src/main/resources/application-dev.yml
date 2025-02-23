@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: taco-cloud
+  thymeleaf:
+    cache: false
+
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+    username: stepan
+    password: 1234
+    url: jdbc:h2:mem:tacocloud
+
+  data:
+    jdbc:
+      dialect: h2
+
+taco:
+  order:
+    pageSize: 20
