@@ -27,6 +27,8 @@ public class SecurityConfig {
                     c.loginPage("/login")
                             .defaultSuccessUrl("/design");
                 })
+//                .oauth2Login(c -> {})
+//                .oauth2Client( c -> {})
                 .build();
     }
 }
