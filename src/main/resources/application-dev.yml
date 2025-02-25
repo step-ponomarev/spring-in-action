@@ -14,6 +14,8 @@ spring:
   data:
     jdbc:
       dialect: h2
+    rest:
+      base-path: /api
 
 taco:
   props:
@@ -22,4 +24,4 @@ taco:
 
 security:
   props:
-    ignore-csrf-url-patterns: /h2-console/**, /api/**
+    ignore-csrf-url-patterns: /**
