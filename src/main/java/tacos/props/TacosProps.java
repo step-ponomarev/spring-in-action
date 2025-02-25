@@ -10,12 +10,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Component
-@ConfigurationProperties(prefix = "taco.order")
+@ConfigurationProperties(prefix = "taco.props")
 @Getter
 @Setter
 @Validated
-public class OrderProps {
+public class TacosProps {
     @Min(1)
     @Max(20)
-    int pageSize = 20;
+    int orderPageSize = 20;
+
+    @Min(1)
+    @Max(20)
+    int tacoPageSize = 20;
 }
