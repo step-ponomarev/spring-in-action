@@ -16,10 +16,5 @@ spring:
       dialect: h2
 
 taco:
-  props:
-    orderPageSize: 20
-    tacoPageSize: 20
-
-security:
-  props:
-    ignore-csrf-url-patterns: /h2-console/**, /api/**
+  order:
+    pageSize: 20

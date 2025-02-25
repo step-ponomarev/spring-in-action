@@ -7,3 +7,7 @@ spring:
 logging:
   level:
     tacos: WARN
+
+taco:
+  order:
+    pageSize: 10
