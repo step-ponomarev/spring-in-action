@@ -90,4 +90,12 @@ public class TacoService {
     public void deleteOrder(Long id) {
         tacoRepository.deleteById(id);
     }
+
+    public Ingredient saveIngredient(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
+
+    public void deleteIngredientById(String id) {
+        ingredientRepository.deleteById(id);
+    }
 }
