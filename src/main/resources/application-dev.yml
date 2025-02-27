@@ -28,6 +28,7 @@ taco:
     orderPageSize: 20
     tacoPageSize: 20
 
+# https://github.com/step-ponomarev/tacos-authorization/pull/1 - сервер авторизации
 security:
   props:
     ignore-csrf-url-patterns: /**
