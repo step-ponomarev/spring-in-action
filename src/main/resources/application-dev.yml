@@ -17,11 +17,18 @@ spring:
     rest:
       base-path: /api
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
 taco:
   props:
     orderPageSize: 20
     tacoPageSize: 20
 
+# https://github.com/step-ponomarev/tacos-authorization/pull/1 - сервер авторизации
 security:
   props:
     ignore-csrf-url-patterns: /**

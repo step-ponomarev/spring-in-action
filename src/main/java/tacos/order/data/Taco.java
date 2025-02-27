@@ -3,9 +3,6 @@ package tacos.order.data;
 import java.util.Date;
 import java.util.List;
 
-
-import org.springframework.data.rest.core.annotation.RestResource;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +14,6 @@ import lombok.Data;
 
 @Data
 @Entity
-@RestResource(rel = "tacos", path = "tacos")
 public final class Taco {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
