@@ -29,6 +29,7 @@ dependencies {
 
 	// https://github.com/step-ponomarev/tacos-authorization/pull/1
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	// database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
