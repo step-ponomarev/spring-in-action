@@ -1,5 +1,6 @@
 package tacos.order.data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import lombok.Data;
 
 @Data
 @Entity
-public final class Taco {
+public final class Taco implements Serializable {
+    private static final long serialVersionUID = 1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

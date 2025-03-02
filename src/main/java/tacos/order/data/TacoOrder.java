@@ -1,5 +1,6 @@
 package tacos.order.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,9 @@ import tacos.security.User;
 
 @Data
 @Entity
-public final class TacoOrder {
+public final class TacoOrder implements Serializable {
+    private static final long serialVersionUID = 1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -49,7 +52,7 @@ public final class TacoOrder {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private final List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
