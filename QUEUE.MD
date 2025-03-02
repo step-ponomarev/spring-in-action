@@ -1,2 +1,2 @@
 # Запустим брокер
-docker run -it --rm --name artemis -p 61616:61616 -p 8161:8161 apache/activemq-artemis
+docker run --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
