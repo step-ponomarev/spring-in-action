@@ -1,4 +1,8 @@
 spring:
+  amqp:
+    deserialization:
+      trust:
+        all: true
   application:
     name: taco-cloud
   thymeleaf:
@@ -9,9 +13,11 @@ spring:
     user: artemis
     password: artemis
 
-  jms:
-    template:
-      default-destination: tacocloud.order.queue
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
   datasource:
     generate-unique-name: false
