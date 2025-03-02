@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
@@ -40,26 +41,30 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(i ->
-                        i.requestMatchers("/orders/**", "/design").authenticated()
-                                .requestMatchers(HttpMethod.POST, "/api/ingredient")
-                                .hasAnyAuthority("SCOPE_writeIngredients")
-                                .requestMatchers(HttpMethod.DELETE, "/api/ingredient")
-                                .hasAnyAuthority("SCOPE_deleteIngredients")
-                                .requestMatchers(HttpMethod.GET, "/api/orders/**")
-                                .hasAnyAuthority("SCOPE_readOrder")
-                                .requestMatchers(HttpMethod.POST, "/api/orders/**")
-                                .hasAnyAuthority("SCOPE_writeOrder")
-                                .requestMatchers("/").permitAll()
-                                .anyRequest().authenticated()
-                ).logout(c -> c.logoutSuccessUrl("/"))
+        return http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
                 .csrf(c -> c.ignoringRequestMatchers(props.getIgnoreCsrfUrlPatterns()))
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                .oauth2ResourceServer(c -> c.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .oauth2Login(c -> c.loginPage("/oauth2/authorization/taco-admin-client"))
                 .build();
+//        return http
+//                .authorizeHttpRequests(i ->
+//                        i.requestMatchers("/orders/**", "/design").authenticated()
+//                                .requestMatchers(HttpMethod.POST, "/api/ingredient")
+//                                .hasAnyAuthority("SCOPE_writeIngredients")
+//                                .requestMatchers(HttpMethod.DELETE, "/api/ingredient")
+//                                .hasAnyAuthority("SCOPE_deleteIngredients")
+//                                .requestMatchers(HttpMethod.GET, "/api/orders/**")
+//                                .hasAnyAuthority("SCOPE_readOrder")
+//                                .requestMatchers(HttpMethod.POST, "/api/orders/**")
+//                                .hasAnyAuthority("SCOPE_writeOrder")
+//                                .requestMatchers("/").permitAll()
+//                                .anyRequest().authenticated()
+//                ).logout(c -> c.logoutSuccessUrl("/"))
+//                .csrf(c -> c.ignoringRequestMatchers(props.getIgnoreCsrfUrlPatterns()))
+//                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+//                .oauth2ResourceServer(c -> c.jwt(Customizer.withDefaults()))
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+//                .oauth2Login(c -> c.loginPage("/oauth2/authorization/taco-admin-client"))
+//                .build();
     }
 
     @Bean
