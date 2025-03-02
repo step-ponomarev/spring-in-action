@@ -1,8 +1,4 @@
 spring:
-  amqp:
-    deserialization:
-      trust:
-        all: true
   application:
     name: taco-cloud
   thymeleaf:
@@ -13,11 +9,14 @@ spring:
     user: artemis
     password: artemis
 
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+  kafka:
+    consumer:
+      group-id: taco.group
+      group-instance-id: taco-instance
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+    bootstrap-servers:
+      - localhost:9092
 
   datasource:
     generate-unique-name: false
