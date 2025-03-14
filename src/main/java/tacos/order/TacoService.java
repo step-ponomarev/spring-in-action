@@ -16,7 +16,6 @@ import tacos.order.repository.IngredientRepository;
 import tacos.order.repository.OrderRepository;
 import tacos.order.repository.TacoRepository;
 import tacos.props.TacosProps;
-import tacos.queue.OrderMessageService;
 import tacos.security.User;
 
 @Service
@@ -29,8 +28,6 @@ public class TacoService {
     private TacoRepository tacoRepository;
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private OrderMessageService orderMessageService;
 
     public TacoService(TacosProps tacosProps) {
         this.tacosProps = tacosProps;
@@ -46,7 +43,6 @@ public class TacoService {
 
     public TacoOrder save(TacoOrder order) {
         TacoOrder save = orderRepository.save(order);
-        orderMessageService.sendOrder(save);
         return save;
     }
 
