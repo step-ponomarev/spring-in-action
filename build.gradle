@@ -39,6 +39,10 @@ dependencies {
 
 	implementation group: 'com.h2database', name: 'h2', version: '2.3.232'
 
+	// integrations
+	implementation 'org.springframework.boot:spring-boot-starter-integration'
+	implementation 'org.springframework.integration:spring-integration-file'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	// test
