@@ -9,14 +9,14 @@ spring:
     user: artemis
     password: artemis
 
-  kafka:
-    consumer:
-      group-id: taco.group
-      group-instance-id: taco-instance
-      enable-auto-commit: true
-      auto-offset-reset: earliest
-    bootstrap-servers:
-      - localhost:9092
+#  kafka:
+#    consumer:
+#      group-id: taco.group
+#      group-instance-id: taco-instance
+#      enable-auto-commit: true
+#      auto-offset-reset: earliest
+#    bootstrap-servers:
+#      - localhost:9092
 
   datasource:
     generate-unique-name: false
@@ -52,6 +52,14 @@ spring:
 #      resourceserver:
 #        jwt:
 #          jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
+
+tacocloud:
+  email:
+    host: imap.tacocloud.com
+    mailbox: INBOX
+    username: taco-in-flow
+    password: 1L0v3T4c0s
+    poll-rate: 10000
 
 taco:
   props:
