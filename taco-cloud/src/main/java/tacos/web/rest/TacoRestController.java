@@ -1,12 +1,8 @@
 package tacos.web.rest;
 
-import java.util.List;
-
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
 import tacos.order.TacoService;
 import tacos.order.data.Taco;
 
@@ -33,11 +30,6 @@ public class TacoRestController {
         this.tacoService = tacoService;
     }
 
-    @GetMapping("/recent")
-    public List<Taco> recentTacos() {
-        return this.tacoService.findRecentTacos();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
         final Taco taco = this.tacoService.findTacoById(id);
@@ -47,11 +39,7 @@ public class TacoRestController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Taco postTaco(@Validated @RequestBody Taco taco, Errors errors) throws BadRequestException {
-        if (errors.hasErrors()) {
-            throw new BadRequestException(errors.getFieldError().getDefaultMessage());
-        }
-
-        return tacoService.saveTaco(taco);
+    public Mono<Taco> postTaco(@Validated @RequestBody Mono<Taco> taco, Errors errors) {
+        return taco.flatMap(tacoService::saveTaco);
     }
 }
