@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Nullable;
+import reactor.core.publisher.Mono;
 import tacos.order.data.Ingredient;
 import tacos.order.data.Taco;
 import tacos.order.data.TacoOrder;
@@ -41,7 +42,7 @@ public class TacoService {
         return new Taco();
     }
 
-    public TacoOrder save(TacoOrder order) {
+    public Mono<TacoOrder> save(TacoOrder order) {
         TacoOrder save = orderRepository.save(order);
         return save;
     }
@@ -75,12 +76,12 @@ public class TacoService {
         orderRepository.deleteAll();
     }
 
-    public List<Taco> findRecentTacos() {
+    public Mono<Taco> findRecentTacos() {
         return tacoRepository.findAllByOrderByCreatedAt(PageRequest.of(0, tacosProps.getTacoPageSize()));
     }
 
-    public Taco saveTaco(Taco taco) {
-        return tacoRepository.save(taco);
+    public Mono<Taco> saveTaco(Taco taco) {
+        return Mono.just(tacoRepository.save(taco));
     }
 
     @Nullable
