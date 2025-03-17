@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/tacocoud
+    username: tacouser
+    password: tacopassword
+
+logging:
+  level:
+    tacos: WARN
