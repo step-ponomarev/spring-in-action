@@ -1,7 +1,0 @@
-{
-  "properties": [{
-    "name": "taco.order.page-size",
-    "type": "java.lang.Integer",
-    "description": "Taco orders page size"
-  }]
-}
