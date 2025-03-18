@@ -1,9 +1,6 @@
 package tacos.web.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Flux;
 import tacos.order.TacoService;
 import tacos.order.data.Ingredient;
 
@@ -28,7 +26,7 @@ public class IngredientRestController {
     }
 
     @GetMapping
-    public List<Ingredient> allIngredients() {
+    public Flux<Ingredient> allIngredients() {
         return tacoService.getIngredients();
     }
 

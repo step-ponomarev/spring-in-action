@@ -1,14 +1,11 @@
 package tacos.order;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Nullable;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tacos.order.data.Ingredient;
 import tacos.order.data.Taco;
@@ -43,16 +40,14 @@ public class TacoService {
     }
 
     public Mono<TacoOrder> save(TacoOrder order) {
-        TacoOrder save = orderRepository.save(order);
-        return save;
+        return orderRepository.save(order);
     }
 
-    public List<Ingredient> getIngredients() {
-        return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+    public Flux<Ingredient> getIngredients() {
+        return ingredientRepository.findAll();
     }
 
-    public List<TacoOrder> getOrders(User user) {
+    public Flux<TacoOrder> getOrders(User user) {
         return orderRepository.findByUserOrderByCreatedAtDesc(
                 user,
                 PageRequest.of(0, tacosProps.getOrderPageSize())
@@ -60,16 +55,16 @@ public class TacoService {
     }
 
     @Nullable
-    public TacoOrder getOrder(Long id) {
-        return orderRepository.findById(id).orElse(null);
+    public Mono<TacoOrder> getOrder(Long id) {
+        return orderRepository.findById(id);
     }
 
-    public List<Ingredient> getIngredients(Ingredient.Type type) {
+    public Flux<Ingredient> getIngredients(Ingredient.Type type) {
         return ingredientRepository.findByType(type);
     }
 
-    public Ingredient getById(String id) {
-        return ingredientRepository.findById(id).orElse(null);
+    public Mono<Ingredient> getById(String id) {
+        return ingredientRepository.findById(id);
     }
 
     public void deleteAll() {
@@ -81,12 +76,12 @@ public class TacoService {
     }
 
     public Mono<Taco> saveTaco(Taco taco) {
-        return Mono.just(tacoRepository.save(taco));
+        return tacoRepository.save(taco);
     }
 
     @Nullable
-    public Taco findTacoById(Long id) {
-        return tacoRepository.findById(id).orElse(null);
+    public Mono<Taco> findTacoById(Long id) {
+        return tacoRepository.findById(id);
     }
 
     public void deleteOrder(Long id) {

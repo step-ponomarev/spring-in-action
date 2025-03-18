@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
 import tacos.order.TacoService;
 import tacos.order.data.TacoOrder;
 
@@ -23,48 +24,52 @@ public class OrderRestController {
 
     @PostMapping(consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public TacoOrder postOrder(@RequestBody TacoOrder tacoOrder) {
-        return tacoService.save(tacoOrder);
+    public Mono<TacoOrder> postOrder(@RequestBody Mono<TacoOrder> tacoOrder) {
+        return tacoOrder.flatMap(tacoService::save);
     }
 
     @PutMapping(value = "/{id}", consumes = {"application/json"})
-    public TacoOrder putOrder(@PathVariable("id") Long id, @RequestBody TacoOrder order) {
-        order.setId(id);
-        return tacoService.save(order);
+    public Mono<TacoOrder> putOrder(@PathVariable("id") Long id, @RequestBody Mono<TacoOrder> order) {
+        return order.flatMap(o -> {
+            o.setId(id);
+
+            return tacoService.save(o);
+        });
     }
 
     @PatchMapping(value = "/{id}", consumes = {"application/json"})
-    public TacoOrder patchOrder(@PathVariable("id") Long id, @RequestBody TacoOrder patch) {
-        final TacoOrder order = tacoService.getOrder(id);
-        if (patch.getDeliveryCity() != null) {
-            order.setDeliveryCity(patch.getDeliveryCity());
-        }
+    public Mono<TacoOrder> patchOrder(@PathVariable("id") Long id, @RequestBody TacoOrder patch) {
+        return tacoService.getOrder(id).flatMap(order -> {
+            if (patch.getDeliveryCity() != null) {
+                order.setDeliveryCity(patch.getDeliveryCity());
+            }
 
-        if (patch.getDeliveryStreet() != null) {
-            order.setDeliveryStreet(patch.getDeliveryStreet());
-        }
+            if (patch.getDeliveryStreet() != null) {
+                order.setDeliveryStreet(patch.getDeliveryStreet());
+            }
 
-        if (patch.getDeliveryState() != null) {
-            order.setDeliveryState(patch.getDeliveryState());
-        }
+            if (patch.getDeliveryState() != null) {
+                order.setDeliveryState(patch.getDeliveryState());
+            }
 
-        if (patch.getDeliveryZip() != null) {
-            order.setDeliveryZip(patch.getDeliveryZip());
-        }
+            if (patch.getDeliveryZip() != null) {
+                order.setDeliveryZip(patch.getDeliveryZip());
+            }
 
-        if (patch.getCcNumber() != null) {
-            order.setCcNumber(patch.getCcNumber());
-        }
+            if (patch.getCcNumber() != null) {
+                order.setCcNumber(patch.getCcNumber());
+            }
 
-        if (patch.getCcExpiration() != null) {
-            order.setCcExpiration(patch.getCcExpiration());
-        }
+            if (patch.getCcExpiration() != null) {
+                order.setCcExpiration(patch.getCcExpiration());
+            }
 
-        if (patch.getCcCVV() != null) {
-            order.setCcCVV(patch.getCcCVV());
-        }
+            if (patch.getCcCVV() != null) {
+                order.setCcCVV(patch.getCcCVV());
+            }
 
-        return tacoService.save(order);
+            return tacoService.save(order);
+        });
     }
 
     @DeleteMapping("/{id}")
