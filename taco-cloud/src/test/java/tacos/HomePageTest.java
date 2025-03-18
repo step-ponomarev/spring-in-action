@@ -8,7 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import tacos.order.TacoService;
+import tacos.service.TacoService;
 
 
 @WebMvcTest(TacoService.class)
