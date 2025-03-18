@@ -31,10 +31,11 @@ public class TacoRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
-        final Taco taco = this.tacoService.findTacoById(id);
-
-        return new ResponseEntity<>(taco, taco != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    public Mono<ResponseEntity<Taco>> tacoById(@PathVariable("id") Long id) {
+        return this.tacoService.findTacoById(id)
+                .map(
+                        taco -> new ResponseEntity<>(taco, taco != null ? HttpStatus.OK : HttpStatus.NOT_FOUND)
+                );
     }
 
     @PostMapping(consumes = "application/json")

@@ -34,7 +34,7 @@ public class DesignTacoController {
         final List<IngredientCategories> ingredientCategories = new ArrayList<>();
 
         for (Ingredient.Type type : Ingredient.Type.values()) {
-            ingredientCategories.add(new IngredientCategories(getTitle(type), tacoService.getIngredients(type)));
+            ingredientCategories.add(new IngredientCategories(getTitle(type), tacoService.getIngredients(type).buffer().blockFirst()));
         }
 
         model.addAttribute("ingredientCategories", ingredientCategories);

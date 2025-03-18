@@ -1,11 +1,10 @@
 package tacos.order.repository;
 
-import java.util.List;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-import org.springframework.data.repository.CrudRepository;
-
+import reactor.core.publisher.Flux;
 import tacos.order.data.Ingredient;
 
-public interface IngredientRepository extends CrudRepository<Ingredient, String> {
-    List<Ingredient> findByType(Ingredient.Type type);
+public interface IngredientRepository extends ReactiveCrudRepository<Ingredient, String> {
+    Flux<Ingredient> findByType(Ingredient.Type type);
 }
