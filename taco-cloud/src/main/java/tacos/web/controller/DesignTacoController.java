@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import tacos.order.data.Ingredient;
-import tacos.order.data.Taco;
-import tacos.order.data.TacoOrder;
-import tacos.order.TacoService;
+import tacos.data.Ingredient;
+import tacos.data.Taco;
+import tacos.data.TacoOrder;
+import tacos.service.TacoService;
 import tacos.web.model.IngredientCategories;
 
 @Slf4j
@@ -34,7 +34,7 @@ public class DesignTacoController {
         final List<IngredientCategories> ingredientCategories = new ArrayList<>();
 
         for (Ingredient.Type type : Ingredient.Type.values()) {
-            ingredientCategories.add(new IngredientCategories(getTitle(type), tacoService.getIngredients(type).buffer().blockFirst()));
+            ingredientCategories.add(new IngredientCategories(getTitle(type), tacoService.getIngredients(type)));
         }
 
         model.addAttribute("ingredientCategories", ingredientCategories);
@@ -75,7 +75,7 @@ public class DesignTacoController {
         }
 
         log.info("Processing taco: " + taco);
-        tacoOrder.addTaco(tacoService.saveTaco(taco).block());
+        tacoOrder.addTaco(taco);
 
         return "redirect:/orders/current";
     }
